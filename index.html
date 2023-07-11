@@ -9,30 +9,33 @@
 
 <body>
   <h2>Emoji Counting:</h2>
+  <textarea id="input-text" style="width: 100%; height: 200px;"></textarea>
+  <button onclick="countEmoji()">Count Emoji</button>
 
   <p id="demo"></p>
 
   <script>
-    // この例では、3つの絵文字をカウントします
-    var txt = "🍀🍀😱🍀🎆🎆🎆";
-    var emojiCount = {};
+    function countEmoji() {
+      var txt = document.getElementById("input-text").value;
+      var emojiCount = {};
 
-    var emojis = [...txt]; // テキストを絵文字ごとに分割します
-    for (var i = 0; i < emojis.length; i++) {
-      var emoji = emojis[i];
-      if (!emojiCount[emoji]) {
-        emojiCount[emoji] = 0;
+      for (var i = 0; i < txt.length; i++) {
+        if (txt.charCodeAt(i) > 255) {
+          var emoji = txt[i];
+          if (!emojiCount[emoji]) {
+            emojiCount[emoji] = 0;
+          }
+          emojiCount[emoji]++;
+        }
       }
-      emojiCount[emoji]++;
-    }
 
-    var output = "";
-    for (var emoji in emojiCount) {
-      output += emoji + ": " + emojiCount[emoji] + "<br>";
-    }
+      var output = "";
+      for (var emoji in emojiCount) {
+        output += emoji + ": " + emojiCount[emoji] + "<br>";
+      }
 
-    document.getElementById("demo").innerHTML = output;
+      document.getElementById("demo").innerHTML = output;
+    }
   </script>
 </body>
-
 </html>
