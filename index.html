@@ -1,33 +1,40 @@
 <!DOCTYPE html>
-<html>
-  <body>
-    <h2>Emoji Counting:</h2>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>emozi</title>
+</head>
 
-    <p id="demo"></p>
+<body>
+  <h2>Emoji Counting:</h2>
 
-    <script>
-      // この例では、3つの絵文字をカウントします
-      var txt = "🍀🍀😱🍀🎆🎆🎆";
-      var emojiCount = {};
+  <p id="demo"></p>
 
-      for (var i = 0; i < txt.length; i++) {
-        if (txt.charCodeAt(i) > 255) {
-          // 絵文字は一般的にunicode値が255を超える
-          var emoji = txt[i];
-          if (!emojiCount[emoji]) {
-            emojiCount[emoji] = 0;
-          }
-          emojiCount[emoji]++;
+  <script>
+    // この例では、3つの絵文字をカウントします
+    var txt = "🍀🍀😱🍀🎆🎆🎆";
+    var emojiCount = {};
+
+    for (var i = 0; i < txt.length; i++) {
+      if (txt.charCodeAt(i) > 255) {
+        // 絵文字は一般的にunicode値が255を超える
+        var emoji = txt[i];
+        if (!emojiCount[emoji]) {
+          emojiCount[emoji] = 0;
         }
+        emojiCount[emoji]++;
       }
+    }
 
-      var output = "";
-      for (var emoji in emojiCount) {
-        output += emoji + ": " + emojiCount[emoji] + "<br>";
-      }
+    var output = "";
+    for (var emoji in emojiCount) {
+      output += emoji + ": " + emojiCount[emoji] + "<br>";
+    }
 
-      document.getElementById("demo").innerHTML = output;
-    </script>
-  </body>
+    document.getElementById("demo").innerHTML = output;
+  </script>
+</body>
+
 </html>
-
