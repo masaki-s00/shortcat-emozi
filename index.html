@@ -2,10 +2,9 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>emozi</title>
-  <script src="https://cdn.jsdelivr.net/npm/emoji-regex@9.2.2/index.js"></script>
 </head>
 
 <body>
@@ -19,8 +18,10 @@
     function countEmoji() {
       var txt = document.getElementById("input-text").value;
       var emojiCount = {};
-      var emojiRegexp = window.emojiRegex();
-      var matches = txt.match(emojiRegexp);
+
+      // テキストの中の全ての非ASCII文字をマッチさせる正規表現
+      var regex = /[^\x00-\x7F]/g;
+      var matches = txt.match(regex);
 
       if (matches) {
         matches.forEach(function(emoji) {
@@ -40,4 +41,5 @@
     }
   </script>
 </body>
+
 </html>
