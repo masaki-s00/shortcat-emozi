@@ -2,28 +2,27 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>emozi</title>
+  <title>Emoji Counting</title>
 </head>
-
 <body>
-  <h2>Emoji Counting:</h2>
-  <textarea id="input-text" style="width: 100%; height: 200px;"></textarea>
+  <h1>Emoji Counting</h1>
+  
+  <textarea id="text" rows="4" cols="50"></textarea> <!-- デフォルトのテキストを削除 -->
   <button onclick="countEmoji()">Count Emoji</button>
-
-  <p id="demo"></p>
+  <p id="result"></p>
 
   <script>
     function countEmoji() {
-      var txt = document.getElementById("input-text").value;
+      var txt = document.getElementById("text").value;
       var emojiCount = {};
+      // 正規表現を修正
+      var regexEmoji = /\p{Emoji}\p{Emoji_Modifier_Base}?(\p{Emoji_Modifier})?(\p{Emoji_ZWJ_Sequence})?/gu;
 
-      var regexEmoji = /\p{Extended_Pictographic}/gu;
+      var emojiArray = txt.match(regexEmoji);
 
-      var match;
-      while ((match = regexEmoji.exec(txt)) != null) {
-        var emoji = match[0];
+      for (var i = 0; i < emojiArray.length; i++) {
+        var emoji = emojiArray[i];
         if (!emojiCount[emoji]) {
           emojiCount[emoji] = 0;
         }
@@ -35,9 +34,8 @@
         output += emoji + ": " + emojiCount[emoji] + "<br>";
       }
 
-      document.getElementById("demo").innerHTML = output;
+      document.getElementById("result").innerHTML = output;
     }
   </script>
 </body>
-
 </html>
