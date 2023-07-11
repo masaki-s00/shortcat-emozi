@@ -17,15 +17,13 @@
     var txt = "🍀🍀😱🍀🎆🎆🎆";
     var emojiCount = {};
 
-    for (var i = 0; i < txt.length; i++) {
-      if (txt.charCodeAt(i) > 255) {
-        // 絵文字は一般的にunicode値が255を超える
-        var emoji = txt[i];
-        if (!emojiCount[emoji]) {
-          emojiCount[emoji] = 0;
-        }
-        emojiCount[emoji]++;
+    var emojis = [...txt]; // テキストを絵文字ごとに分割します
+    for (var i = 0; i < emojis.length; i++) {
+      var emoji = emojis[i];
+      if (!emojiCount[emoji]) {
+        emojiCount[emoji] = 0;
       }
+      emojiCount[emoji]++;
     }
 
     var output = "";
