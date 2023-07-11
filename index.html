@@ -2,8 +2,8 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>emozi</title>
 </head>
 
@@ -19,22 +19,23 @@
       var txt = document.getElementById("input-text").value;
       var emojiCount = {};
 
-      // テキストの中の全ての非ASCII文字をマッチさせる正規表現
-      var regex = /[^\x00-\x7F]/g;
-      var matches = txt.match(regex);
+      // Array.fromを使用してUnicode文字列を個々の文字に分解します。
+      var chars = Array.from(txt);
 
-      if (matches) {
-        matches.forEach(function(emoji) {
-          if (!emojiCount[emoji]) {
-            emojiCount[emoji] = 0;
+      chars.forEach(function(char) {
+        // Unicode範囲をチェックして絵文字のみをカウントします。
+        var codePoint = char.codePointAt(0);
+        if (codePoint > 255) { // 非ASCII文字のみをカウントします。
+          if (!emojiCount[char]) {
+            emojiCount[char] = 0;
           }
-          emojiCount[emoji]++;
-        });
-      }
+          emojiCount[char]++;
+        }
+      });
 
       var output = "";
-      for (var emoji in emojiCount) {
-        output += emoji + ": " + emojiCount[emoji] + "<br>";
+      for (var char in emojiCount) {
+        output += char + ": " + emojiCount[char] + "<br>";
       }
 
       document.getElementById("demo").innerHTML = output;
